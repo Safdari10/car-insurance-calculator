@@ -7,3 +7,6 @@ api.use(express.urlencoded({ extended: true }));
 api.use(express.json());
 
 api.use("/", router);
+
+
+export default api
