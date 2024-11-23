@@ -1,0 +1,3 @@
+"Test Case ID ","Test Scenario"," Input Data",Expected Result,Test Steps,Priority,Description
+"TC-001","API Reachable","No input required",Status code 200 with success response,send a get request and verify response,High,Verifies that the API is live and reachable
+,,,,,,
