@@ -1,8 +1,0 @@
-"Test Case ID ","Test Scenario"," Input Data",Expected Result,Test Steps,Priority,Description
-"TC-001","API Reachable","No input required",Status code 200 with success response,Send a get request ,High,Verifies that the API is live and reachable
-TC-002,Valid Input Calculation,"{ "car_value" : 6614,  "risk_rating":  5 }","{ "monthly_premium": 27.5, "yearly_premium": 330 }",Send post request with valid input,High,Covers the main functionality(happy path)
-TC-003 ,Negative Car Value,,,,,
-TC-004,Non-Numeric Car Value,,,,,
-TC-005,Non-Numeric Risk Rating,,,,,
-TC-006,Risk Rating Out of Range(6),,,,,
-TC-007,Missing Car Value Field,,,,,
