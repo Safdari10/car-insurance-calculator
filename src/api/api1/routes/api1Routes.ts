@@ -1,10 +1,10 @@
 // Defines endpoints and links them to controllers.
 
 import express from 'express';
+import { calculateCarValue } from '../controllers/api1Controller';
 
 const router = express.Router();
 
-// Add your routes here, for example:
-// router.get('/example', exampleController);
+router.post('/car-value', calculateCarValue);
 
-export const api1Routes = router;
+export default router;
