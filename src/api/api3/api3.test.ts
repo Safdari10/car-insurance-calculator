@@ -16,10 +16,7 @@ describe("Qoute Route", () => {
   test("API should return correct premiums for valid input", async () => {
     const input = { car_value: 6614.75, risk_rating: 5 };
 
-    // Send the request to the API
-    const response = await request(app)
-      .post("/quote") // Use POST to send the input data
-      .send(input);
+    const response = await request(app).post("/quote").send(input);
 
     expect(response.status).toBe(200);
 
@@ -27,8 +24,21 @@ describe("Qoute Route", () => {
     expect(response.body.monthly_premium).toEqual(27.76);
   });
 
-  test("API should return an error when required fields are missing,", async () => {
-    //missing car value
+  test("API should return an error when car_value is missing", async () => {
+    const input = { risk_rating: 5 };
+
+    const response = await request(app).post("/quote").send(input);
+
     expect(response.status).toBe(400);
+    expect(response.body).toEqual({ error: "Missing Input" });
+  });
+
+  test("API should return an error when risk_rating is missing", async () => {
+    const input = { car_value: 6614.75 };
+
+    const response = await request(app).post("/quote").send(input);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ error: "Missing Input" });
   });
 });
