@@ -1,9 +1,10 @@
-import { Router } from "express"
-import { index } from "../controllers/api3Controller"
+import { Router } from "express";
+import { index, quote } from "../controllers/api3Controller";
 
-const router = Router()
-
-router.get("/", index)
+const router = Router();
 
 
-export {router}
+router.get("/", index);
+router.post("/quote", quote);
+
+export { router };
