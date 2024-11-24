@@ -6,7 +6,6 @@ import app from "../api3/index";
 
 const api = express();
 
-api.use(express.urlencoded({ extended: true }));
 api.use(express.json());
 
 api.use("/", router);
