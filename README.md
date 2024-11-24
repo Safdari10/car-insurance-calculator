@@ -117,11 +117,31 @@ npm test
 
 ### Project Structure
 
-- src/
-  - controllers/ - Contains logic for handling API requests.
-  - models/ - Contains the business logic for calculating premiums.
-  - routes/ - Defines API routes.
-  - app.ts - Initializes the Express app and middleware.
+```js
+
+- src/api/
+
+  - api1/
+
+    - controllers/ - Contains logic for handling API requests.
+    - models/ - Contains the business logic for calculating premiums.
+    - routes/ - Defines API routes.
+    - app.ts - Initializes the Express app and middleware.
+
+  - api2/
+
+    - controllers/ - Contains logic for handling API requests.
+    - models/ - Contains the business logic for calculating premiums.
+    - routes/ - Defines API routes.
+    - app.ts - Initializes the Express app and middleware.
+
+  - api3/
+
+    - controllers/ - Contains logic for handling API requests.
+    - models/ - Contains the business logic for calculating premiums.
+    - routes/ - Defines API routes.
+    - app.ts - Initializes the Express app and middleware.
+```
 
 ---
 
@@ -131,3 +151,5 @@ npm test
 - TypeScript for static typing and development
 - Jest for unit testing
 - Supertest for HTTP testing
+
+### END of Document
