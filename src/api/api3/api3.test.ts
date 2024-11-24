@@ -1,5 +1,5 @@
 import request from "supertest";
-import { app } from "../api3/index";
+import app  from "../api3/index";
 
 describe("Success cases for /quote API (include edge cases)", () => {
   const successCases = [
