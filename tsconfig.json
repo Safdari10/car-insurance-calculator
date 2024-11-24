@@ -17,6 +17,12 @@
       "outDir": "./build",
       "rootDir": "./src"
     },
-    "include": ["src/**/*.ts"]
+    "include": ["src/**/*.ts"],
+            "files": [],
+        "references": [
+          { "path": "./tsconfig.app.json" },
+          { "path": "./tsconfig.node.json" }
+        ]
   }
+  
   
