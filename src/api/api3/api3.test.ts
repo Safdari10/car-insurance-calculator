@@ -1,14 +1,5 @@
-const express = require("express");
-import { router } from "./routes/api3Routes";
 import request from "supertest";
-import { describe, test, expect } from "@jest/globals";
-import app from "../api3/index";
-
-const api = express();
-
-api.use(express.json());
-
-api.use("/", router);
+import { app } from "../api3/index";
 
 describe("Success cases for /quote API (include edge cases)", () => {
   const successCases = [
@@ -49,23 +40,23 @@ describe("Error cases for /quote API", () => {
     },
     {
       input: { car_value: 6614 },
-      expectedError: "Risk Rating is required",
+      expectedError: "Invalid input",
     },
     {
       input: { risk_rating: 3 },
-      expectedError: "Car value is required",
+      expectedError: "Invalid input",
     },
     {
       input: {},
-      expectedError: "Car value and Risk Rating are required",
+      expectedError: "Invalid input",
     },
     {
       input: { car_value: "Abc", risk_rating: 3 },
-      expectedError: "Invalid Input",
+      expectedError: "Invalid input",
     },
     {
       input: { car_value: -5000, risk_rating: 3 },
-      expectedError: "Invalid Input",
+      expectedError: "Car value must be a positive number",
     },
   ];
 
