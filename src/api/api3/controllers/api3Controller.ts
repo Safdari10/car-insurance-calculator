@@ -23,7 +23,7 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  if (car_value <= 0) {
+  if (car_value < 0) {
     res.status(400).json({ error: "Car value must be a positive number" });
     return;
   }
