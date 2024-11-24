@@ -32,7 +32,6 @@ describe("Success cases for /quote API (include edge cases)", () => {
         2
       ); 
     },
-    10000
   );
 });
 
