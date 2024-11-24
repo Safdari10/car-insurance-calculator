@@ -37,3 +37,46 @@ describe("Success cases for /quote API (include edge cases)", () => {
     }
   );
 });
+
+describe("Error cases for /quote API", () => {
+  const errorCases = [
+    {
+      input: { car_value: 6614, risk_rating: 6 },
+      expectedError: "Risk Rating is invalid",
+    },
+    {
+      input: { car_value: 6614, risk_rating: 0 },
+      expectedError: "Risk Rating is invalid",
+    },
+    {
+      input: { car_value: 6614 },
+      expectedError: "Risk Rating is required",
+    },
+    {
+      input: { risk_rating: 3 },
+      expectedError: "Car value is required",
+    },
+    {
+      input: {},
+      expectedError: "Car value and Risk Rating are required",
+    },
+    {
+      input: { car_value: "Abc", risk_rating: 3 },
+      expectedError: "Invalid Input",
+    },
+    {
+      input: { car_value: -5000, risk_rating: 3 },
+      expectedError: "Invalid Input",
+    },
+  ];
+
+  test.each(errorCases)(
+    "should return 400 for invalid input",
+    async ({ input, expectedError }) => {
+      const response = await request(app).post("/quote").send(input);
+
+      expect(response.status).toBe(400);
+      expect(response.body).toEqual({ error: expectedError });
+    }
+  );
+});
