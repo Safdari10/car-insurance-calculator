@@ -23,11 +23,11 @@ describe("Success cases for /quote API (include edge cases)", () => {
       const response = await request(app).post("/quote").send(input);
 
       expect(response.status).toBe(200);
-      expect(response.body.yearly_premium).toBeCloseTo(
+      expect(response.body.yearly_premium).toEqual(
         expectedOutput.yearly_premium,
        
       ); 
-      expect(response.body.monthly_premium).toBeCloseTo(
+      expect(response.body.monthly_premium).toEqual(
         expectedOutput.monthly_premium,
         
       ); 
