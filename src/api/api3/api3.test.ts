@@ -25,11 +25,11 @@ describe("Success cases for /quote API (include edge cases)", () => {
       expect(response.status).toBe(200);
       expect(response.body.yearly_premium).toBeCloseTo(
         expectedOutput.yearly_premium,
-        2
+       
       ); 
       expect(response.body.monthly_premium).toBeCloseTo(
         expectedOutput.monthly_premium,
-        2
+        
       ); 
     },
   );
