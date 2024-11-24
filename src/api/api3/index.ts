@@ -1,11 +1,10 @@
 const express = require("express");
 import { router } from "./routes/api3Routes";
 
-const api = express();
+const app = express();
 
-api.use(express.urlencoded({ extended: true }));
-api.use(express.json());
+app.use(express.json());
 
-api.use("/api3", router)
+app.use("/api3", router)
 
-export default api
+export default app
