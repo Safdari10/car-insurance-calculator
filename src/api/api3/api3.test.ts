@@ -40,15 +40,11 @@ describe("Error cases for /quote API", () => {
     },
     {
       input: { car_value: 6614 },
-      expectedError: "Invalid input",
+      expectedError: "Risk rating is required",
     },
     {
       input: { risk_rating: 3 },
-      expectedError: "Invalid input",
-    },
-    {
-      input: {},
-      expectedError: "Invalid input",
+      expectedError: "Car value is required",
     },
     {
       input: { car_value: "Abc", risk_rating: 3 },

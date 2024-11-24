@@ -7,12 +7,17 @@ export const index = (req: Request, res: Response): void => {
 
 export const quote = async (req: Request, res: Response): Promise<void> => {
   const { car_value, risk_rating } = req.body;
-  
-  if( car_value === "" || risk_rating === "" ) {
-    res.status(400).json({ error: "Car value and Risk rating are required"})
-    return
-  }
 
+  if (car_value === undefined ) {
+    res.status(400).json({ error: "Car value is required" });
+    return;
+  }
+  if ( risk_rating === undefined ) {
+    res.status(400).json({ error: "Risk rating is required" });
+    return;
+  }
+  
+  
   if (typeof car_value !== "number" || typeof risk_rating !== "number") {
     res.status(400).json({ error: "Invalid input" });
     return;
@@ -31,6 +36,7 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
   try {
     const premiums = calculatePremiums(car_value, risk_rating);
     res.status(200).json(premiums);
+    return;
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
