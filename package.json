@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --coverage",
-    "dev": "ts-node src/api/api1/index.ts",
-    "test:jest": "jest",
-    "dev:frontend": "vite",
-    "start": "ts-node src/api/api1/index.ts"
+    "test:api1": "jest src/api/api1/api1.test.ts",
+    "test:api2": "jest src/api/api2/api2.test.ts",
+    "test:api3": "jest src/api/api3/api3.test.ts",
+    "test:all": "jest",
+    "test:watch": "jest --watch --coverage",
+    "dev:api1": "node --loader ts-node/esm src/api/api1/index.ts",
+    "dev:api2": "node --loader ts-node/esm src/api/api2/index.ts",
+    "dev:api3": "node --loader ts-node/esm src/api/api3/index.ts",
+    "dev:frontend": "vite"
   },
   "keywords": [],
   "author": "",

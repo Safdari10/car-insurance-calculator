@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from './app';
+import app from './app.js';
 
 describe('Car Value API Tests', () => {
     it('should return 6620 for model "Civic" and year 2020', async () => {
