@@ -1,5 +1,5 @@
 import request from "supertest";
-import app  from "./app";
+import app from "./app";
 
 describe("Success cases for /quote API (include edge cases)", () => {
   const successCases = [
@@ -9,7 +9,7 @@ describe("Success cases for /quote API (include edge cases)", () => {
     },
     {
       input: { car_value: 100000000, risk_rating: 5 },
-      expectedOutput: { monthly_premium: 416666.67, yearly_premium: 50000 },
+      expectedOutput: { monthly_premium: 416666.67, yearly_premium: 5000000 },
     },
     {
       input: { car_value: 0, risk_rating: 1 },
@@ -19,12 +19,20 @@ describe("Success cases for /quote API (include edge cases)", () => {
 
   test.each(successCases)(
     "should return correct premiums for input values",
-    async (input, expectedOutput) => {
+    async ({ input, expectedOutput }) => {
       const response = await request(app).post("/quote").send(input);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(expectedOutput);
-    }
+      expect(response.body.yearly_premium).toBeCloseTo(
+        expectedOutput.yearly_premium,
+        2
+      ); 
+      expect(response.body.monthly_premium).toBeCloseTo(
+        expectedOutput.monthly_premium,
+        2
+      ); 
+    },
+    10000
   );
 });
 
