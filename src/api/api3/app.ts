@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express"
 import { router } from "./routes/api3Routes";
 
 const app = express();
