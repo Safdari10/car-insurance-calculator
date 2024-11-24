@@ -7,10 +7,5 @@ app.use(express.json());
 
 app.use("/", router)
 
-const port = 3500
-
-app.listen(port, () => {
-    console.log(`Server Listening @ http://localhost:${port}`);
-  });
 
 export default app
