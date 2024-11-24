@@ -10,8 +10,8 @@ export const quote = (req: Request, res: Response) => {
     const yearly_premium = car_value * risk_rating / 100
     const monthly_premium = yearly_premium / 12
 
-    return {
+    return res.status(200).json({
         yearly_premium: yearly_premium,
         monthly_premium: monthly_premium
-    }
+    })
 }
