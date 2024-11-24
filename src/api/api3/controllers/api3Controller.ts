@@ -10,6 +10,7 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
   
   if( car_value === "" || risk_rating === "" ) {
     res.status(400).json({ error: "Car value and Risk rating are required"})
+    return
   }
 
   if (typeof car_value !== "number" || typeof risk_rating !== "number") {
