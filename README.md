@@ -125,8 +125,9 @@ npm test
 
 ---
 
-### Technologies Used
+### Technologies Stack
 
 - Express for the web framework.
 - TypeScript for static typing and development
-- Jest for unit and integration testing.
+- Jest for unit testing
+- Supertest for HTTP testing
