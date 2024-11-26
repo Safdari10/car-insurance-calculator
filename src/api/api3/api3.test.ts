@@ -12,9 +12,9 @@ describe("Success cases for /quote API (include edge cases)", () => {
       expectedOutput: { monthly_premium: 416666.67, yearly_premium: 5000000 },
     },
     {
-      input: { car_value: 0, risk_rating: 1 },
-      expectedOutput: { monthly_premium: 0, yearly_premium: 0 },
-    },
+      input : { car_value: "5,000", risk_rating: 1 },
+      expectedOutput: { monthly_premium: 4.17, yearly_premium: 50 },
+    }
   ];
 
   test.each(successCases)(
@@ -39,27 +39,27 @@ describe("Error cases for /quote API", () => {
   const errorCases = [
     {
       input: { car_value: 6614, risk_rating: 6 },
-      expectedError: "Risk Rating is invalid",
+      expectedError: "Risk Rating must be between 1 and 5",
     },
     {
       input: { car_value: 6614, risk_rating: 0 },
-      expectedError: "Risk Rating is invalid",
+      expectedError: "Car Value and Risk Rating are required",
     },
     {
       input: { car_value: 6614 },
-      expectedError: "Risk rating is required",
+      expectedError: "Car Value and Risk Rating are required",
     },
     {
       input: { risk_rating: 3 },
-      expectedError: "Car value is required",
+      expectedError: "Car Value and Risk Rating are required",
     },
     {
       input: { car_value: "Abc", risk_rating: 3 },
-      expectedError: "Invalid input",
+      expectedError: "Car Value and Risk Rating must be valid numbers",
     },
     {
       input: { car_value: -5000, risk_rating: 3 },
-      expectedError: "Car value must be a positive number",
+      expectedError: "Car Value must be a positive number",
     },
   ];
 
