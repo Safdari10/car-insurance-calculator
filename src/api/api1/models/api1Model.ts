@@ -1,0 +1,1 @@
+// Defines data structures, database schemas, or models.
