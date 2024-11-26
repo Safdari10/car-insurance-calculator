@@ -54,7 +54,7 @@ describe("Error cases for /quote API", () => {
       expectedError: "Car Value and Risk Rating are required",
     },
     {
-      input: { car_value: "Abc", risk_rating: 3 },
+      input: { car_value: "Abc", risk_rating: "#$2" },
       expectedError: "Car Value and Risk Rating must be valid numbers",
     },
     {

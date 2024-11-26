@@ -9,22 +9,21 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
   try {
     const { car_value, risk_rating } = req.body;
 
-    // Ensure car_value and risk_rating are provided
     if (!car_value || !risk_rating) {
       res.status(400).json({ error: "Car Value and Risk Rating are required" });
       return;
     }
 
-    // Sanitize and parse inputs
     const sanitizedCarValue = car_value.toString().replace(/,/g, "");
     const sanitizedRiskRating = risk_rating.toString().replace(/,/g, "");
 
     const carValue = parseInt(sanitizedCarValue, 10);
     const riskRating = parseInt(sanitizedRiskRating, 10);
 
-    // Validate inputs
     if (isNaN(carValue) || isNaN(riskRating)) {
-      res.status(400).json({ error: "Car Value and Risk Rating must be valid numbers" });
+      res
+        .status(400)
+        .json({ error: "Car Value and Risk Rating must be valid numbers" });
       return;
     }
 
@@ -38,7 +37,6 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Calculate premiums
     const premiums = calculatePremiums(carValue, riskRating);
     res.status(200).json(premiums);
   } catch (error) {
