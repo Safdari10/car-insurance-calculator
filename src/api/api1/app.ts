@@ -1,7 +1,7 @@
 // Combines routes, middleware, and configurations into an Express application
 
 import express, { NextFunction, Request, Response } from 'express';
-import api1Routes from './routes/api1Routes.js'; 
+import api1Routes from './routes/api1Routes'; 
 
 const app = express();
 
