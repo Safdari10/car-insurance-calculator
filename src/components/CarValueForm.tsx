@@ -1,24 +1,22 @@
-import React from 'react';
-import { CarValueRequest } from '../types/car';
+import React, { useState } from 'react';
 import { ChevronRight, Car } from 'lucide-react';
 
-interface CarFormProps {
-  onSubmit: (data: CarValueRequest) => void;
-  isLoading: boolean;
-  onClear: () => void;
+interface CarValueFormProps {
+  onSubmit: (model: string, year: number) => void;
+  isLoading?: boolean;
 }
 
-export function CarForm({ onSubmit, isLoading, onClear }: CarFormProps) {
+const CarValueForm: React.FC<CarValueFormProps> = ({ onSubmit, isLoading = false }) => {
   const currentYear = new Date().getFullYear();
-  const [model, setModel] = React.useState('');
-  const [year, setYear] = React.useState('');
-  const [errors, setErrors] = React.useState<{ model?: string; year?: string }>({});
+  const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+  const [errors, setErrors] = useState<{ model?: string; year?: string }>({});
 
   const validate = (): boolean => {
     const newErrors: { model?: string; year?: string } = {};
     
     if (!model.trim()) {
-      newErrors.model = 'Car model is required';
+      newErrors.model = 'Model is required';
     }
 
     const yearNum = parseInt(year);
@@ -35,15 +33,8 @@ export function CarForm({ onSubmit, isLoading, onClear }: CarFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      onSubmit({ model: model.trim(), year: parseInt(year) });
+      onSubmit(model, parseInt(year));
     }
-  };
-
-  const handleClear = () => {
-    setModel('');
-    setYear('');
-    setErrors({});
-    onClear();
   };
 
   return (
@@ -87,34 +78,25 @@ export function CarForm({ onSubmit, isLoading, onClear }: CarFormProps) {
         {errors.year && <p className="text-red-500 text-sm">{errors.year}</p>}
       </div>
 
-      <div className="flex gap-4">
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium 
-                   hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                   focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 
-                   disabled:cursor-not-allowed flex items-center justify-center gap-2"
-        >
-          {isLoading ? (
-            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : (
-            <>
-              Calculate Value
-              <ChevronRight size={20} />
-            </>
-          )}
-        </button>
-        <button
-          type="button"
-          onClick={handleClear}
-          className="px-6 py-3 rounded-xl border border-gray-300 text-gray-700 
-                   hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 
-                   focus:ring-offset-2 transition-all duration-200"
-        >
-          Clear
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="w-full bg-blue-600 text-white px-6 py-3 rounded-xl font-medium 
+                 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 
+                 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+      >
+        {isLoading ? (
+          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        ) : (
+          <>
+            Calculate Value
+            <ChevronRight size={20} />
+          </>
+        )}
+      </button>
     </form>
   );
-}
+};
+
+export default CarValueForm; 
