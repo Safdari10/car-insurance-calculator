@@ -11,7 +11,7 @@ export default {
           '2xl': '1.5rem',
         },
         boxShadow: {
-          'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+          'xl': '0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.6)',
         },
       },
     },
