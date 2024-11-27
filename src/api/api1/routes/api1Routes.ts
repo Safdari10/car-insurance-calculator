@@ -1,7 +1,7 @@
 // Defines endpoints and links them to controllers.
 
 import express from 'express';
-import { calculateCarValue } from '../controllers/api1Controller.js';
+import { calculateCarValue } from '../controllers/api1Controller';
 
 const router = express.Router();
 

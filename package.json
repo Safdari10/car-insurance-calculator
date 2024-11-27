@@ -9,10 +9,15 @@
     "test:api3": "jest src/api/api3/api3.test.ts",
     "test:all": "jest",
     "test:watch": "jest --watch --coverage",
-    "dev:api1": "node --loader ts-node/esm src/api/api1/index.ts",
-    "dev:api2": "node --loader ts-node/esm src/api/api2/index.ts",
-    "dev:api3": "node --loader ts-node/esm src/api/api3/index.ts",
-    "dev:frontend": "vite"
+    "dev:api1": "node --loader ts-node/esm src/api/api1/server.ts",
+    "dev:api2": "node --loader ts-node/esm src/api/api2/api2.ts",
+    "dev:api3": "node --loader ts-node/esm src/api/api3/server.ts",
+    "dev:frontend": "vite",
+    "start:gateway": "ts-node src/gateway/server.ts",
+    "start:api1": "ts-node src/api/api1/server.ts",
+    "start:api2": "ts-node src/api/api2/api2.ts",
+    "start:api3": "ts-node src/api/api3/server.ts",
+    "start:all": "concurrently \"npm run start:gateway\" \"npm run start:api1\" \"npm run start:api2\" \"npm run start:api3\""
   },
   "keywords": [],
   "author": "",
@@ -35,16 +40,17 @@
     "@types/react": "^18.3.12",
     "@types/supertest": "^6.0.2",
     "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^9.1.0",
     "jest": "^29.7.0",
     "nodemon": "^3.1.7",
+    "postcss": "^8.4.31",
     "supertest": "^7.0.0",
+    "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
-    "vite": "^5.4.11",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8.4.31",
-    "autoprefixer": "^10.4.16"
+    "vite": "^5.4.11"
   },
-  "type": "module"
+  "type": "commonjs"
 }
