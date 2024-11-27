@@ -66,3 +66,26 @@ describe('Car Value API Tests', () => {
         expect(response.body.car_value).toBeDefined();
     });
 });
+
+describe('CORS and API Accessibility Tests', () => {
+  it('should allow CORS preflight requests', async () => {
+    const response = await request(app)
+      .options('/api/v1/car-value')
+      .set('Origin', 'http://localhost:3000')
+      .set('Access-Control-Request-Method', 'POST')
+      .set('Access-Control-Request-Headers', 'Content-Type');
+
+    expect(response.headers['access-control-allow-origin']).toBeTruthy();
+    expect(response.headers['access-control-allow-methods']).toBeTruthy();
+    expect(response.status).toBe(204);
+  });
+
+  it('should accept JSON content type', async () => {
+    const response = await request(app)
+      .post('/api/v1/car-value')
+      .set('Content-Type', 'application/json')
+      .send({ model: "Civic", year: 2020 });
+
+    expect(response.status).toBe(200);
+  });
+});
