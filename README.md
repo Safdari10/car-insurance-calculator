@@ -110,7 +110,9 @@ npm install
 2. Run tests:
 
 ```
-npm test
+npm test:api1
+npm test:api2
+npm test:api3
 ```
 
 ---

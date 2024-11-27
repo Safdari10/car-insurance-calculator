@@ -1,6 +1,6 @@
 export const calculateRiskRating = (claimHistory: string | null): { risk_rating?: number; error?: string } => {
   if (!claimHistory || typeof claimHistory !== 'string' || claimHistory.trim() === '') {
-    return { error: "there is an error" };
+    return { error: "There is an error" };
   }
 
   const keywords = ["collide", "crash", "scratch", "bump", "smash"];

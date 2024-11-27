@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from './api2';
+import app from './app';
 
 describe('Risk Rating API Tests', () => {
   test('Valid input', async () => {
@@ -15,7 +15,7 @@ describe('Risk Rating API Tests', () => {
       .post('/api2/risk-rating')
       .send({ claim_history: "" });
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({ error: "there is an error" });
+    expect(response.body).toEqual({ error: "There is an error" });
   });
 
   test('Risk rating exceeds maximum limit', async () => {
