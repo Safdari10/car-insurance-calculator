@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { calculatePremiums } from "../models/api3Model";
+import { validateQuote } from "../service/api3Validation";
 
 export const index = (req: Request, res: Response): void => {
   res.status(200).json({ message: "Welcome to my API" });
@@ -9,36 +10,20 @@ export const quote = async (req: Request, res: Response): Promise<void> => {
   try {
     const { car_value, risk_rating } = req.body;
 
-    if (!car_value || !risk_rating) {
-      res.status(400).json({ error: "Car Value and Risk Rating are required" });
+    const validatedInput = validateQuote(car_value, risk_rating);
+
+    if (validatedInput.error) {
+      res.status(400).json(validatedInput);
       return;
+
+    } else {
+      const { carValue, riskRating } = validatedInput;
+
+      if (carValue && riskRating) {
+        const premiums = calculatePremiums(carValue, riskRating);
+        res.status(200).json(premiums);
+      }
     }
-
-    const sanitizedCarValue = car_value.toString().replace(/,/g, "");
-    const sanitizedRiskRating = risk_rating.toString().replace(/,/g, "");
-
-    const carValue = parseInt(sanitizedCarValue, 10);
-    const riskRating = parseInt(sanitizedRiskRating, 10);
-
-    if (isNaN(carValue) || isNaN(riskRating)) {
-      res
-        .status(400)
-        .json({ error: "Car Value and Risk Rating must be valid numbers" });
-      return;
-    }
-
-    if (carValue <= 0) {
-      res.status(400).json({ error: "Car Value must be a positive number" });
-      return;
-    }
-
-    if (riskRating < 1 || riskRating > 5) {
-      res.status(400).json({ error: "Risk Rating must be between 1 and 5" });
-      return;
-    }
-
-    const premiums = calculatePremiums(carValue, riskRating);
-    res.status(200).json(premiums);
   } catch (error) {
     console.error("Error processing quote:", error);
     res.status(500).json({ error: "Internal Server Error" });

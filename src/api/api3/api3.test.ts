@@ -20,12 +20,12 @@ describe("Testing POST API /quote", () => {
     },
     {
       input: { car_value: 6614, risk_rating: 6 },
-      expectedOutput: { error: "Risk Rating must be between 1 and 5" },
+      expectedOutput: { error: "Risk Rating must be a number between 1 and 5" },
       expectedStatus: 400,
     },
     {
-      input: { car_value: 6614, risk_rating: 0 },
-      expectedOutput: { error: "Car Value and Risk Rating are required" },
+      input: { car_value: 6614, risk_rating: -1 },
+      expectedOutput: { error: "Risk Rating must be a number between 1 and 5" },
       expectedStatus: 400,
     },
     {
@@ -39,9 +39,9 @@ describe("Testing POST API /quote", () => {
       expectedStatus: 400,
     },
     {
-      input: { car_value: "Abc", risk_rating: "#$2" },
+      input: { car_value: "Abc", risk_rating: "3" },
       expectedOutput: {
-        error: "Car Value and Risk Rating must be valid numbers",
+        error: "Car Value must be a positive number",
       },
       expectedStatus: 400,
     },
