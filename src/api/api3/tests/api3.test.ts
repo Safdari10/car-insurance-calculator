@@ -61,7 +61,6 @@ describe("Testing POST API /quote", () => {
     "should return return expected output given the inputs",
     async ({ input, expectedOutput, expectedStatus }) => {
       const response = await request(app).post("/quote").send(input);
-      const body = response.body;
       expect(response.status).toBe(expectedStatus);
       expect(response.body).toEqual(expectedOutput);
     }
