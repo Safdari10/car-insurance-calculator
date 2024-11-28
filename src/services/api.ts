@@ -1,4 +1,4 @@
-import { CarValueRequest, CarValueResponse, ErrorResponse } from '../types/car';
+import { CarValueRequest, CarValueResponse, ErrorResponse, QuoteResponse } from '../types/car';
 
 const API_BASE_URL = 'http://localhost:4000/api';
 
@@ -55,24 +55,36 @@ export async function calculateRiskRating(claimHistory: string): Promise<{ risk_
 }
 
 // API 3: Calculate Insurance Quote
-export async function calculateQuote(carValue: number, riskRating: number): Promise<number> {
+export async function calculateQuote(carValue: number, riskRating: number): Promise<QuoteResponse> {
   try {
-    const response = await fetch('http://localhost:4000/api/quote', {
+    console.log('Sending quote request:', { car_value: carValue, risk_rating: riskRating });
+    
+    const response = await fetch(`${API_BASE_URL}/v3/quote`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ carValue, riskRating }),
+      body: JSON.stringify({ 
+        car_value: carValue, 
+        risk_rating: riskRating 
+      }),
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => null);
+      console.error('API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        errorData
+      });
+      throw new Error(errorData?.error || `HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.monthlyPremium;
+    console.log('Quote response:', data);
+    return data;
   } catch (error) {
     console.error('Error calculating quote:', error);
-    throw new Error('Failed to calculate insurance quote');
+    throw error;
   }
 }
