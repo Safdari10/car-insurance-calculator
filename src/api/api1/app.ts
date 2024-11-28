@@ -1,30 +1,31 @@
 // Combines routes, middleware, and configurations into an Express application
 
-import express, { NextFunction, Request, Response } from 'express';
-import cors from 'cors';
-import api1Routes from './routes/api1Routes'; 
+import express from "express";
+import cors from "cors";
+import { router } from "./routes/api1Routes";
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Add CORS middleware
+app.use(cors({
+    origin: process.env.FRONTEND_URL || '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 204
+}));
 
 // Debug middleware
-app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log(`API1 received request: ${req.method} ${req.originalUrl}`);
+app.use((req, res, next) => {
+    console.log('API1 received request:', req.method, req.path);
     next();
 });
 
-// Mount routes without the /v1 prefix
-app.use('/', api1Routes);
+app.use(express.json());
+
+// Mount routes directly without additional prefix
+app.use(router);
 
 console.log('API1 Routes mounted');
-
-// Error handling
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error('API1 Error:', err);
-    res.status(500).json({ error: 'Something went wrong!' });
-});
 
 export default app;
