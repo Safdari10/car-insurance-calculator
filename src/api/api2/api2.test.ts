@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../src/api/api2/api2';
+import app from './app';
 
 describe('Risk Rating API Tests', () => {
   test('Valid input', async () => {

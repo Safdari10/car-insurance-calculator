@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "./app";
+import app from "../app";
 
 describe("Testing POST API /quote", () => {
   const testCases = [
@@ -50,15 +50,20 @@ describe("Testing POST API /quote", () => {
       expectedOutput: { error: "Car Value must be a positive number" },
       expectedStatus: 400,
     },
+    {
+      input: {},
+      expectedOutput: { error: "Car Value and Risk Rating are required" },
+      expectedStatus: 400,
+    },
   ];
 
   test.each(testCases)(
     "should return return expected output given the inputs",
     async ({ input, expectedOutput, expectedStatus }) => {
       const response = await request(app).post("/quote").send(input);
-      const body = response.body;
       expect(response.status).toBe(expectedStatus);
       expect(response.body).toEqual(expectedOutput);
     }
   );
 });
+

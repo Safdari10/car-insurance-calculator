@@ -1,9 +1,8 @@
 import express from 'express';
+import riskRatingRoutes from './routes/api2Routes';
 
 const app = express();
+app.use(express.json()); 
 
-app.use(express.json());
-
-// Add your routes here
-
+app.use('/api2', riskRatingRoutes);
 export default app;
