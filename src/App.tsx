@@ -5,10 +5,15 @@ import QuoteForm from './components/QuoteForm';
 import './App.css';
 import { calculateCarValue, calculateRiskRating, calculateQuote } from './services/api';
 
+interface Quote {
+  monthly_premium: number;
+  yearly_premium: number;
+}
+
 function App() {
   const [carValue, setCarValue] = useState<number | null>(null);
   const [riskRating, setRiskRating] = useState<number | null>(null);
-  const [quote, setQuote] = useState<number | null>(null);
+  const [quote, setQuote] = useState<Quote | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -38,10 +43,11 @@ function App() {
     try {
       setError(null);
       setIsLoading(true);
-      const quote = await calculateQuote(carValue, riskRating);
-      setQuote(quote);
+      const response = await calculateQuote(carValue, riskRating);
+      setQuote(response);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'An error occurred');
+      setQuote(null);
     } finally {
       setIsLoading(false);
     }
@@ -67,10 +73,11 @@ function App() {
         </div>
 
         <div className="calculator">
-          <QuoteForm onSubmit={handleQuote} />
+          <QuoteForm onSubmit={handleQuote} isLoading={isLoading} />
           {quote && (
             <div className="result">
-              <div>Monthly Premium: ${quote}</div>
+              <div>Monthly Premium: ${quote.monthly_premium}</div>
+              <div>Yearly Premium: ${quote.yearly_premium}</div>
             </div>
           )}
         </div>
