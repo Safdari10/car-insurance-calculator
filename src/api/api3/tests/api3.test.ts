@@ -51,10 +51,10 @@ describe("Testing POST API /quote", () => {
       expectedStatus: 400,
     },
     {
-      input: { },
+      input: {},
       expectedOutput: { error: "Car Value and Risk Rating are required" },
       expectedStatus: 400,
-    }
+    },
   ];
 
   test.each(testCases)(
