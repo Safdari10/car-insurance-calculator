@@ -1,4 +1,4 @@
-# M2-team-api-project
+# CarInsuranceCalculator
 
 This projects consists of 3 APIs that allow users to get calculate car value, find out their risk rating and finally get an insurance premium quote.
 
