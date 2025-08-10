@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import CarValueForm from './components/CarValueForm';
-import RiskRatingForm from './components/RiskRatingForm';
-import QuoteForm from './components/QuoteForm';
-import './App.css';
-import { calculateCarValue, calculateRiskRating, calculateQuote } from './services/api';
+import React, { useState } from "react";
+import CarValueForm from "./components/CarValueForm";
+import RiskRatingForm from "./components/RiskRatingForm";
+import QuoteForm from "./components/QuoteForm";
+import "./App.css";
+import { calculateCarValue, calculateRiskRating, calculateQuote } from "./services/api";
 
 interface Quote {
   monthly_premium: number;
@@ -23,7 +23,7 @@ function App() {
       const response = await calculateCarValue({ model, year });
       setCarValue(response.car_value);
     } catch (err) {
-      setError('Failed to calculate car value');
+      setError("Failed to calculate car value");
       console.error(err);
     }
   };
@@ -34,7 +34,7 @@ function App() {
       const response = await calculateRiskRating(claimHistory);
       setRiskRating(response.risk_rating);
     } catch (err) {
-      setError('Failed to calculate risk rating');
+      setError("Failed to calculate risk rating");
       console.error(err);
     }
   };
@@ -46,7 +46,7 @@ function App() {
       const response = await calculateQuote(carValue, riskRating);
       setQuote(response);
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred');
+      setError(error instanceof Error ? error.message : "An error occurred");
       setQuote(null);
     } finally {
       setIsLoading(false);
@@ -56,20 +56,16 @@ function App() {
   return (
     <div className="App">
       <h1>Car Insurance Calculator</h1>
-      
+
       <div className="calculators">
         <div className="calculator">
           <CarValueForm onSubmit={handleCarValue} />
-          {carValue && (
-            <div className="result">Car Value: ${carValue}</div>
-          )}
+          {carValue && <div className="result">Car Value: ${carValue}</div>}
         </div>
 
         <div className="calculator">
           <RiskRatingForm onSubmit={handleRiskRating} />
-          {riskRating && (
-            <div className="result">Risk Rating: {riskRating}</div>
-          )}
+          {riskRating && <div className="result">Risk Rating: {riskRating}</div>}
         </div>
 
         <div className="calculator">
